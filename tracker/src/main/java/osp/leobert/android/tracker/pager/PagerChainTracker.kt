@@ -70,7 +70,7 @@ class PagerChainTracker {
 
         }
 
-        const val debug = true
+        var debug = true
         private val bpContexts: MutableMap<String, BuryPointContext> = hashMapOf()
 
         fun registerBp(token: String, bp: BuryPointContext) {
