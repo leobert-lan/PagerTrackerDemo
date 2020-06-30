@@ -4,10 +4,10 @@ import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.util.Log
-import android.util.Pair
 import com.google.gson.Gson
 import osp.leobert.android.tracker.BuryPointContext
 import osp.leobert.android.tracker.pager.PagerChainTracker
+import osp.leobert.android.tracker.pager.PagerTrackerLifecycleCallbacks
 
 /**
  * <p><b>Package:</b> osp.leobert.android.pagertrackerdemo </p>
@@ -26,9 +26,13 @@ class DemoApplication : Application() {
         BuryPointContext.buryPointUploader =
             BuryPointContext.BuryPointUploader { pointKey, params ->
                 pointKey?.let {
-                    Log.d("tracker_msg", "onPointUpload:$it , params: ${gson.toJson(params)}")
+                    Log.d(
+                        PagerChainTracker.tag,
+                        "onPointUpload:$it , params: ${gson.toJson(params)}"
+                    )
                 }
             }
+        registerActivityLifecycleCallbacks(PagerTrackerLifecycleCallbacks())
     }
 }
 

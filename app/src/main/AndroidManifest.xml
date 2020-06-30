@@ -11,8 +11,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".essay.EssayDetailActivity"
+            android:label="@string/title_activity_essay_detail"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".bio.PostsRecordActivity"
-            android:label="@string/title_activity_posts_record"/>
+            android:label="@string/title_activity_posts_record" />
         <activity android:name=".index.IndexActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

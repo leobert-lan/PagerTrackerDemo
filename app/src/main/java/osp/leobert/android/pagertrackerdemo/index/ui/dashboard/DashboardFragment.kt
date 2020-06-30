@@ -9,12 +9,23 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import osp.leobert.android.pagertrackerdemo.BaseFragment
 import osp.leobert.android.pagertrackerdemo.R
+import osp.leobert.android.tracker.pager.ITrackedPager
+import osp.leobert.android.tracker.pager.TrackedPager
 
-class DashboardFragment : BaseFragment() {
+
+@TrackedPager(
+    pagerPoint = "P_DASH_FG",
+    whenFragment = TrackedPager.FragmentStrategy.REPLACE_ACTIVITY
+)
+class DashboardFragment : BaseFragment(), ITrackedPager.FragmentInViewPager {
 
     private lateinit var dashboardViewModel: DashboardViewModel
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         dashboardViewModel = ViewModelProviders.of(this).get(DashboardViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_demo, container, false)
         val textView: TextView = root.findViewById(R.id.tv)

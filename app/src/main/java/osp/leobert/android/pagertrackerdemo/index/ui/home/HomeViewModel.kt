@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 class HomeViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
+        value = "IndexFragment\n假装这里是feed流，点击后进入了一个文章详情，模拟id是321"
     }
     val text: LiveData<String> = _text
 }
