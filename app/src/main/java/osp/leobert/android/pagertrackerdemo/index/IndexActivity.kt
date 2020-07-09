@@ -19,6 +19,7 @@ import osp.leobert.android.pagertrackerdemo.index.ui.dashboard.DashboardFragment
 import osp.leobert.android.pagertrackerdemo.index.ui.home.HomeFragment
 import osp.leobert.android.pagertrackerdemo.index.ui.notifications.NotificationsFragment
 import osp.leobert.android.pagertrackerdemo.launchActivity
+import osp.leobert.android.tracker.pager.PagerChainTracker
 import osp.leobert.android.tracker.pager.TrackedPager
 
 //首页需要Fragment的P点，所以不再单独定义点号，拦截自动上传即可
@@ -87,6 +88,12 @@ class IndexActivity : BaseActivity() {
     override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
         outState.putInt(key_index, mTabLayout?.selectedTabPosition ?: 0)
         super.onSaveInstanceState(outState, outPersistentState)
+    }
+
+    override fun finish() {
+        //对于一般的应用，主页面关闭基本就可以认为页面链全部清除了。
+        PagerChainTracker.clearAll()
+        super.finish()
     }
 
 
