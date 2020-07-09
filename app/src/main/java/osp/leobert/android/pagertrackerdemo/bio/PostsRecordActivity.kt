@@ -99,14 +99,15 @@ private class DemoFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rl = RelativeLayout(inflater.context)
         rl.addView(TextView(inflater.context).apply {
-            id = R.id.tv
+            id = R.id.id_tv
         }, RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
         return rl
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val tv = view.findViewById<TextView>(R.id.tv)
+        val tv = view.findViewById<TextView>(R.id.id_tv)
+        tv.text = arguments?.getString(BUNDLE_STR_PAGE_NAME) ?: "missing name"
 
     }
 }

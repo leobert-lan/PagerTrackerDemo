@@ -11,7 +11,7 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
-    <item name="tv" type="id"/>
+    <item name="id_tv" type="id"/>
 
 
     <string name="hello_first_fragment">君不见，黄河之水天上来，奔流到海不复回。\n

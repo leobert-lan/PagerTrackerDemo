@@ -9,7 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.fragment_demo.*
+import kotlinx.android.synthetic.main.fragment_demo_notify.*
 import osp.leobert.android.pagertrackerdemo.BaseFragment
 import osp.leobert.android.pagertrackerdemo.R
 import osp.leobert.android.pagertrackerdemo.bio.BioActivity
@@ -17,35 +17,26 @@ import osp.leobert.android.tracker.pager.ITrackedPager
 import osp.leobert.android.tracker.pager.TrackedPager
 
 
-@TrackedPager(
-    pagerPoint = "P_NOTIFY_FG",
-    whenFragment = TrackedPager.FragmentStrategy.REPLACE_ACTIVITY
-)
+@TrackedPager(pagerPoint = "P_NOTIFY_FG", whenFragment = TrackedPager.FragmentStrategy.REPLACE_ACTIVITY)
 class NotificationsFragment : BaseFragment(), ITrackedPager.FragmentInViewPager {
 
     private lateinit var notificationsViewModel: NotificationsViewModel
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        notificationsViewModel =
-            ViewModelProviders.of(this).get(NotificationsViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_demo, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        notificationsViewModel = ViewModelProviders.of(this).get(NotificationsViewModel::class.java)
+        return inflater.inflate(R.layout.fragment_demo_notify, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         notification_rv.layoutManager = LinearLayoutManager(notification_rv.context)
         notificationsViewModel.notifications.observe(viewLifecycleOwner, Observer {
             notification_rv.adapter = NotificationsAdapter(it)
         })
-        return root
     }
 }
 
-class NotificationVH(parent: ViewGroup) :
-    RecyclerView.ViewHolder(
-        LayoutInflater.from(parent.context)
-            .inflate(R.layout.vh_notification, parent, false)
-    ) {
+class NotificationVH(parent: ViewGroup) : RecyclerView.ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.vh_notification, parent, false)) {
 
     val tvName = itemView.findViewById<TextView>(R.id.tv_user)
     val tvMsg = itemView.findViewById<TextView>(R.id.tv_msg)
