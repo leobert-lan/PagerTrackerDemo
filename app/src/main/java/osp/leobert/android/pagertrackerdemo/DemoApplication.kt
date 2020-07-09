@@ -39,3 +39,7 @@ class DemoApplication : Application() {
 fun Intent.launchActivity(context: Context) {
     context.startActivity(this)
 }
+
+inline fun <reified T> startActivity(context: Context) {
+    Intent(context,T::class.java).launchActivity(context)
+}

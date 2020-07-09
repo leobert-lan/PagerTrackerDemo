@@ -4,10 +4,11 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Pair
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
+import android.view.View
+import kotlinx.android.synthetic.main.content_essay_detail.*
 import osp.leobert.android.pagertrackerdemo.BaseActivity
 import osp.leobert.android.pagertrackerdemo.R
+import osp.leobert.android.pagertrackerdemo.bio.BioActivity
 import osp.leobert.android.pagertrackerdemo.launchActivity
 import osp.leobert.android.tracker.pager.PagerChainTracker
 import osp.leobert.android.tracker.pager.TrackedPager
@@ -34,11 +35,14 @@ class EssayDetailActivity : BaseActivity() {
         setContentView(R.layout.activity_essay_detail)
         setSupportActionBar(findViewById(R.id.toolbar))
 
-        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
+
         PagerChainTracker.pressData(this, mutableListOf(Pair<String, String>("id", essayId)))
         PagerChainTracker.manualReport()
+
+        val onAuthorClickedListener = View.OnClickListener {
+            BioActivity.launch(this@EssayDetailActivity, "李白的id")
+        }
+        avatar.setOnClickListener(onAuthorClickedListener)
+        tv_author.setOnClickListener(onAuthorClickedListener)
     }
 }

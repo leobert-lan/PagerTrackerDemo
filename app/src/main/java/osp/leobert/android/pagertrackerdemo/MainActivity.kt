@@ -19,7 +19,8 @@ class MainActivity : BaseActivity() {
         lifecycleScope.launch {
             async {
                 delay(3000)
-                IndexActivity.launch(this@MainActivity)
+                startActivity<IndexActivity>(this@MainActivity)
+//                IndexActivity.launch(this@MainActivity)
                 finish()
             }
 

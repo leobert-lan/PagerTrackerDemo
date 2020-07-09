@@ -7,8 +7,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.fragment_demo.*
 import osp.leobert.android.pagertrackerdemo.BaseFragment
 import osp.leobert.android.pagertrackerdemo.R
+import osp.leobert.android.pagertrackerdemo.bio.BioActivity
 import osp.leobert.android.tracker.pager.ITrackedPager
 import osp.leobert.android.tracker.pager.TrackedPager
 
@@ -29,10 +33,48 @@ class NotificationsFragment : BaseFragment(), ITrackedPager.FragmentInViewPager 
         notificationsViewModel =
             ViewModelProviders.of(this).get(NotificationsViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_demo, container, false)
-        val textView: TextView = root.findViewById(R.id.tv)
-        notificationsViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
+        notification_rv.layoutManager = LinearLayoutManager(notification_rv.context)
+        notificationsViewModel.notifications.observe(viewLifecycleOwner, Observer {
+            notification_rv.adapter = NotificationsAdapter(it)
         })
         return root
     }
+}
+
+class NotificationVH(parent: ViewGroup) :
+    RecyclerView.ViewHolder(
+        LayoutInflater.from(parent.context)
+            .inflate(R.layout.vh_notification, parent, false)
+    ) {
+
+    val tvName = itemView.findViewById<TextView>(R.id.tv_user)
+    val tvMsg = itemView.findViewById<TextView>(R.id.tv_msg)
+    var notification: Notification? = null
+
+    init {
+
+        itemView.setOnClickListener { v ->
+            notification?.let {
+                BioActivity.launch(v.context, it.userId)
+            }
+        }
+    }
+
+    fun bind(notification: Notification) {
+        this.notification = notification
+        tvName.text = notification.userName
+        tvMsg.text = notification.message
+    }
+
+}
+
+class NotificationsAdapter(val list: List<Notification>) : RecyclerView.Adapter<NotificationVH>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotificationVH = NotificationVH(parent)
+
+    override fun getItemCount(): Int = list.size
+
+    override fun onBindViewHolder(holder: NotificationVH, position: Int) {
+        holder.bind(list[position])
+    }
+
 }
