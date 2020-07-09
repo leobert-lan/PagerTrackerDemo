@@ -28,7 +28,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="75dp"
         android:gravity="center_vertical"
-        android:text="李白"
+        android:text="李白(点我进个人主页)"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView

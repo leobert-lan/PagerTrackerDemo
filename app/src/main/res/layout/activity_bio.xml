@@ -6,4 +6,23 @@
     android:layout_height="match_parent"
     tools:context=".bio.BioActivity">
 
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/dummy_bio" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="#80ffffff"
+        android:gravity="center"
+        android:text="偷个懒，直接放一张图了"
+        android:textColor="#26262a"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
